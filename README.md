@@ -8,11 +8,57 @@ This project automates the management of Abacus.ai chat deployments and their se
 - Deleting chats older than a specified number of days
 - Dry-run mode to preview deletions without actually deleting
 
+## Installation
+
+### Quick Install (Recommended)
+
+Install the script with a single command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/rdoering/abcus_chat_cleaner/main/install.sh | bash
+```
+
+This will:
+- Clone the repository to `$XDG_DATA_HOME/abcus_chat_cleaner` (defaults to `~/.local/share/abcus_chat_cleaner`)
+- Create a symlink at `~/.local/bin/abcus_clean_chat`
+- Make the script executable
+- Check for required dependencies (git, jq)
+
+### Manual Installation
+
+1. Clone the repository:
+```bash
+git clone git@github.com:rdoering/abcus_chat_cleaner.git ~/.local/share/abcus_chat_cleaner
+```
+
+2. Create a symlink:
+```bash
+mkdir -p ~/.local/bin
+ln -s ~/.local/share/abcus_chat_cleaner/clean.sh ~/.local/bin/abcus_clean_chat
+chmod +x ~/.local/share/abcus_chat_cleaner/clean.sh
+```
+
+3. Add `~/.local/bin` to your PATH (if not already present):
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+### Update
+
+To update an existing installation, run the install script again or:
+
+```bash
+cd ~/.local/share/abcus_chat_cleaner
+git pull
+```
+
 ## Prerequisites
 
 - IntelliJ IDEA with HTTP Client Plugin (for `main.http`)
 - Credentials (API Key) for Abacus.ai
 - For Bash scripts: `jq` and `curl` (install jq with `brew install jq` on macOS)
+- Git (for installation)
 
 ## Usage with IntelliJ HTTP Client
 
@@ -40,7 +86,7 @@ The `clean.sh` script provides an automated way to manage and clean up chat sess
 ### Command Line Options
 
 ```bash
-./clean.sh [--api-key KEY] [--older-than DAYS] [--dry-run]
+abcus_clean_chat [--api-key KEY] [--older-than DAYS] [--dry-run]
 ```
 
 **Options:**
@@ -60,23 +106,23 @@ The script accepts the API key in three ways (in order of priority):
 
 ```bash
 # List all sessions (no deletion)
-./clean.sh
+abcus_clean_chat
 
 # Preview chats older than 30 days (dry run)
-./clean.sh --older-than 30 --dry-run
+abcus_clean_chat --older-than 30 --dry-run
 
 # Delete chats older than 30 days (with confirmation)
-./clean.sh --older-than 30
+abcus_clean_chat --older-than 30
 
 # Delete chats older than 7 days with API key as argument
-./clean.sh --api-key "YOUR_KEY" --older-than 7
+abcus_clean_chat --api-key "YOUR_KEY" --older-than 7
 
 # Use environment variable for API key
 export ABACUS_API_KEY="YOUR_KEY"
-./clean.sh --older-than 14
+abcus_clean_chat --older-than 14
 
 # Dry run with all options
-./clean.sh --api-key "YOUR_KEY" --older-than 90 --dry-run
+abcus_clean_chat --api-key "YOUR_KEY" --older-than 90 --dry-run
 ```
 
 ### Example Output
