@@ -1,0 +1,86 @@
+@apiKey=s2_708f83c88c044be8b50fd835c08aa154
+
+
+### Fetch Projects
+# @no-cookie-jar
+GET https://api.abacus.ai/api/v0/listProjects
+apiKey: {{apiKey}}
+
+> {%
+    client.test("Projects fetched", function() {
+        client.assert(response.status === 200);
+    })
+
+    client.test("At least one project exists", function() {
+        client.assert(response.body.result[0].projectId !== undefined);
+        client.global.set('projectId', response.body.result[0].projectId);
+        console.log("Project ID set to: " + client.global.get('projectId'));
+    })
+ %}
+
+
+### Fetch Deployments
+# @no-cookie-jar
+GET https://api.abacus.ai/api/v0/listDeployments?projectId={{projectId}}
+apiKey: {{apiKey}}
+
+> {%
+    client.test("Deployments fetched", function() {
+        client.assert(response.status === 200);
+    });
+
+    // Suche nach dem Deployment mit dem Namen "ChatLLM Deployment"
+    const deployments = response.body.result;
+    const chatLLMDeployment = deployments.find(d => d.name === "ChatLLM Deployment");
+    client.test("ChatLLM Deployment exists", function() {
+        client.assert(chatLLMDeployment !== undefined, "ChatLLM Deployment not found");
+    });
+
+    if (chatLLMDeployment) {
+        client.global.set('chatLLMDeploymentId', chatLLMDeployment.deploymentId);
+        console.log("ChatLLM Deployment ID set to: " + client.global.get('chatLLMDeploymentId'));
+    }
+%}
+
+### Fetch Sessions
+# @no-cookie-jar
+GET https://api.abacus.ai/api/v0/listDeploymentConversations?deploymentId={{chatLLMDeploymentId}}
+apiKey: {{apiKey}}
+
+<> 2025-10-18T195841.200.json
+<> 2025-10-18T195505.400.json
+<> 2025-10-18T195334.400.json
+<> 2025-10-18T195327.400.json
+<> 2025-10-18T194447.200.json
+<> 2025-10-18T194402.200.json
+<> 2025-10-18T194036.200.json
+<> 2025-10-18T184529.200.json
+<> 2025-10-18T184209.400.json
+<> 2025-10-18T183942.200.json
+<> 2025-10-18T182808.400.json
+<> 2025-10-18T182745.400.json
+<> 2025-10-18T181012.200.json
+<> 2025-10-18T180908.400.json
+
+###
+
+DELETE https://api.abacus.ai/api/v0/deleteDeploymentConversation?deploymentConversationId={{currentItem}}
+apiKey: {{apiKey}}
+
+<> 2025-10-18T185651.200.json
+<> 2025-10-18T185237.200.json
+<> 2025-10-18T185201.200.json
+<> 2025-10-18T185108.404.json
+<> 2025-10-18T185003.404.json
+<> 2025-10-18T184817.404.json
+<> 2025-10-18T183806.200.json
+
+### fetch one
+# @no-cookie-jar
+GET https://api.abacus.ai/api/v0/getDeploymentConversation?deploymentConversationId=11ca355365
+apiKey: {{apiKey}}
+
+<> 2025-10-18T195237.200.json
+<> 2025-10-18T195141.200.html
+
+###
