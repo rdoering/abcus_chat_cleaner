@@ -20,7 +20,7 @@ curl -fsSL https://raw.githubusercontent.com/rdoering/abcus_chat_cleaner/main/in
 
 This will:
 - Clone the repository to `$XDG_DATA_HOME/abcus_chat_cleaner` (defaults to `~/.local/share/abcus_chat_cleaner`)
-- Create a symlink at `~/.local/bin/abcus_clean_chat`
+- Create a symlink at `~/.local/bin/abacus_clean_chat.sh`
 - Make the script executable
 - Check for required dependencies (git, jq)
 
@@ -34,8 +34,9 @@ git clone git@github.com:rdoering/abcus_chat_cleaner.git ~/.local/share/abcus_ch
 2. Create a symlink:
 ```bash
 mkdir -p ~/.local/bin
-ln -s ~/.local/share/abcus_chat_cleaner/abacus_clean_chat.sh ~/.local/bin/abcus_clean_chat
+ln -s ~/.local/share/abcus_chat_cleaner/abacus_clean_chat.sh ~/.local/bin/abacus_clean_chat.sh
 chmod +x ~/.local/share/abcus_chat_cleaner/abacus_clean_chat.sh
+chmod +x ~/.local/bin/abacus_clean_chat.sh
 ```
 
 3. Add `~/.local/bin` to your PATH (if not already present):
@@ -86,7 +87,7 @@ The `abacus_clean_chat.sh` script provides an automated way to manage and clean 
 ### Command Line Options
 
 ```bash
-abcus_clean_chat [--api-key KEY] [--older-than DAYS] [--dry-run]
+abacus_clean_chat.sh [--api-key KEY] [--older-than DAYS] [--dry-run]
 ```
 
 **Options:**
@@ -106,23 +107,23 @@ The script accepts the API key in three ways (in order of priority):
 
 ```bash
 # List all sessions (no deletion)
-abcus_clean_chat
+abacus_clean_chat.sh
 
 # Preview chats older than 30 days (dry run)
-abcus_clean_chat --older-than 30 --dry-run
+abacus_clean_chat.sh --older-than 30 --dry-run
 
 # Delete chats older than 30 days (with confirmation)
-abcus_clean_chat --older-than 30
+abacus_clean_chat.sh --older-than 30
 
 # Delete chats older than 7 days with API key as argument
-abcus_clean_chat --api-key "YOUR_KEY" --older-than 7
+abacus_clean_chat.sh --api-key "YOUR_KEY" --older-than 7
 
 # Use environment variable for API key
 export ABACUS_API_KEY="YOUR_KEY"
-abcus_clean_chat --older-than 14
+abacus_clean_chat.sh --older-than 14
 
 # Dry run with all options
-abcus_clean_chat --api-key "YOUR_KEY" --older-than 90 --dry-run
+abacus_clean_chat.sh --api-key "YOUR_KEY" --older-than 90 --dry-run
 ```
 
 ### Example Output

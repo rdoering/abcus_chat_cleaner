@@ -6,7 +6,7 @@ set -e
 XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 INSTALL_DIR="$XDG_DATA_HOME/abcus_chat_cleaner"
 BIN_DIR="$HOME/.local/bin"
-SYMLINK_PATH="$BIN_DIR/abcus_clean_chat"
+SYMLINK_PATH="$BIN_DIR/abacus_clean_chat.sh"
 
 echo "=== Abcus Chat Cleaner Installation ==="
 echo ""
@@ -68,6 +68,7 @@ fi
 
 echo "Creating symlink: $SYMLINK_PATH -> $INSTALL_DIR/abacus_clean_chat.sh"
 ln -s "$INSTALL_DIR/abacus_clean_chat.sh" "$SYMLINK_PATH"
+chmod +x "$SYMLINK_PATH"
 
 # Prüfe ob $BIN_DIR im PATH ist
 if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
@@ -83,10 +84,10 @@ echo ""
 echo "=== Installation Complete ==="
 echo ""
 echo "The script has been installed to: $INSTALL_DIR"
-echo "You can now run it with: abcus_clean_chat"
+echo "You can now run it with: abacus_clean_chat.sh"
 echo ""
 echo "Examples:"
-echo "  abcus_clean_chat --older-than 30 --dry-run"
-echo "  abcus_clean_chat --older-than 7"
+echo "  abacus_clean_chat.sh --older-than 30 --dry-run"
+echo "  abacus_clean_chat.sh --older-than 7"
 echo ""
 echo "For more information, see: $INSTALL_DIR/README.md"
