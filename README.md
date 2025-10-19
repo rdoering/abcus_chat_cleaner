@@ -34,8 +34,8 @@ git clone git@github.com:rdoering/abcus_chat_cleaner.git ~/.local/share/abcus_ch
 2. Create a symlink:
 ```bash
 mkdir -p ~/.local/bin
-ln -s ~/.local/share/abcus_chat_cleaner/clean.sh ~/.local/bin/abcus_clean_chat
-chmod +x ~/.local/share/abcus_chat_cleaner/clean.sh
+ln -s ~/.local/share/abcus_chat_cleaner/abacus_clean_chat.sh ~/.local/bin/abcus_clean_chat
+chmod +x ~/.local/share/abcus_chat_cleaner/abacus_clean_chat.sh
 ```
 
 3. Add `~/.local/bin` to your PATH (if not already present):
@@ -73,7 +73,7 @@ The `main.http` file contains all necessary HTTP requests and JavaScript logic t
 
 ## Usage with Bash Script
 
-The `clean.sh` script provides an automated way to manage and clean up chat sessions.
+The `abacus_clean_chat.sh` script provides an automated way to manage and clean up chat sessions.
 
 ### Features
 

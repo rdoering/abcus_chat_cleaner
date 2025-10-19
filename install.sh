@@ -58,7 +58,7 @@ else
 fi
 
 # Mache das Skript ausführbar
-chmod +x "$INSTALL_DIR/clean.sh"
+chmod +x "$INSTALL_DIR/abacus_clean_chat.sh"
 
 # Erstelle oder aktualisiere Symlink
 if [ -L "$SYMLINK_PATH" ] || [ -e "$SYMLINK_PATH" ]; then
@@ -66,8 +66,8 @@ if [ -L "$SYMLINK_PATH" ] || [ -e "$SYMLINK_PATH" ]; then
     rm -f "$SYMLINK_PATH"
 fi
 
-echo "Creating symlink: $SYMLINK_PATH -> $INSTALL_DIR/clean.sh"
-ln -s "$INSTALL_DIR/clean.sh" "$SYMLINK_PATH"
+echo "Creating symlink: $SYMLINK_PATH -> $INSTALL_DIR/abacus_clean_chat.sh"
+ln -s "$INSTALL_DIR/abacus_clean_chat.sh" "$SYMLINK_PATH"
 
 # Prüfe ob $BIN_DIR im PATH ist
 if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
